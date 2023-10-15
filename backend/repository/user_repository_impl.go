@@ -8,16 +8,16 @@ import (
 )
 
 type UserRepositoryImpl struct {
-	db *sql.DB
+	DB *sql.DB
 }
 
 func NewUserRepositoryImpl(db *sql.DB) UserRepository {
-	return &UserRepositoryImpl{db: db}
+	return &UserRepositoryImpl{DB: db}
 }
 
-func (u *UserRepositoryImpl) create(ctx context.Context, tx *sql.Tx, user *entity.User) (*entity.User, error) {
+func (u *UserRepositoryImpl) Create(ctx context.Context, tx *sql.Tx, user *entity.User) (*entity.User, error) {
 	//TODO implement me
-	SQL := "INSERT INTO users (id, first_name, last_name, username, email, password, role, image, created_at, updated_at)" +
+	SQL := "INSERT INTO users (id, firstname, lastname, username, email, password, role, image, created_at, updated_at)" +
 		"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
 	_, err := tx.ExecContext(
@@ -43,7 +43,7 @@ func (u *UserRepositoryImpl) create(ctx context.Context, tx *sql.Tx, user *entit
 	return user, nil
 }
 
-func (u *UserRepositoryImpl) update(ctx context.Context, tx *sql.Tx, user *entity.User) (*entity.User, error) {
+func (u *UserRepositoryImpl) Update(ctx context.Context, tx *sql.Tx, user *entity.User) (*entity.User, error) {
 	//TODO implement me
 	SQL := "UPDATE users SET firstname = ?," +
 		"lastname = ?," +
@@ -69,7 +69,7 @@ func (u *UserRepositoryImpl) update(ctx context.Context, tx *sql.Tx, user *entit
 	return user, nil
 }
 
-func (u *UserRepositoryImpl) delete(ctx context.Context, tx *sql.Tx, user *entity.User) error {
+func (u *UserRepositoryImpl) Delete(ctx context.Context, tx *sql.Tx, user *entity.User) error {
 	//TODO implement me
 	SQL := "DELETE FROM users WHERE id = ?"
 
